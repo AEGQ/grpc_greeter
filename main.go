@@ -53,10 +53,10 @@ func main() {
 	if len(os.Args) > 1 {
 		name = os.Args[1]
 	}
-	ctx, cancel := context.WithTimeout(context.Background(), time.Second)
-	defer cancel()
+// 	ctx, cancel := context.WithTimeout(context.Background(), time.Second)
+// 	defer cancel()
 	for {
-	    r, err := c.SayHello(ctx, &pb.HelloRequest{Name: name})
+	    r, err := c.SayHello(context.Background(), &pb.HelloRequest{Name: name})
 	    if err != nil {
 		log.Fatalf("could not greet: %v", err)
 	    }
