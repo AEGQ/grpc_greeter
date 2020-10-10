@@ -55,9 +55,12 @@ func main() {
 	}
 	ctx, cancel := context.WithTimeout(context.Background(), time.Second)
 	defer cancel()
-	r, err := c.SayHello(ctx, &pb.HelloRequest{Name: name})
-	if err != nil {
+	for {
+	    r, err := c.SayHello(ctx, &pb.HelloRequest{Name: name})
+	    if err != nil {
 		log.Fatalf("could not greet: %v", err)
-	}
-	log.Printf("Greeting: %s", r.GetMessage())
+	    }
+	    log.Printf("Greeting: %s\n", r.GetMessage())
+            time.Sleep(time.Millisecond*500)
+        }
 }
