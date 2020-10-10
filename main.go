@@ -25,7 +25,8 @@ import (
 	"os"
 	"time"
 	"flag"
-
+	"crypto/tls"
+	"google.golang.org/grpc/credentials"
 	"google.golang.org/grpc"
 	pb "google.golang.org/grpc/examples/helloworld/helloworld"
 )
@@ -39,7 +40,8 @@ func main() {
 	flag.Parse()
 
 	// Set up a connection to the server.
-	conn, err := grpc.Dial(*address, grpc.WithInsecure(), grpc.WithBlock())
+	//conn, err := grpc.Dial(*address, grpc.WithInsecure(), grpc.WithBlock())
+	conn, err := grpc.Dial(*address, grpc.WithTransportCredentials(credentials.NewTLS(&tls.Config{InsecureSkipVerify: true})),grpc.WithBlock())
 	if err != nil {
 		log.Fatalf("did not connect: %v", err)
 	}
