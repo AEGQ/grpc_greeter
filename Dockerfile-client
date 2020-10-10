@@ -1,7 +1,8 @@
 FROM golang:1.13 as builder
 
 RUN go get -u google.golang.org/grpc/examples/helloworld/greeter_client
-ADD main.go /
-RUN go build /main.go -o /bin/main
+ADD main.go /go/src/main/
+WORKDIR /go/src/main
+RUN go build && ls 
 
-ENTRYPOINT ["main"]
+ENTRYPOINT ["/go/src/main/main"]
