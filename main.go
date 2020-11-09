@@ -40,8 +40,8 @@ func main() {
 	flag.Parse()
 
 	// Set up a connection to the server.
-	//conn, err := grpc.Dial(*address, grpc.WithInsecure(), grpc.WithBlock())
-	conn, err := grpc.Dial(*address, grpc.WithTransportCredentials(credentials.NewTLS(&tls.Config{InsecureSkipVerify: true})),grpc.WithBlock())
+	conn, err := grpc.Dial(*address, grpc.WithInsecure(), grpc.WithBlock())
+	//conn, err := grpc.Dial(*address, grpc.WithTransportCredentials(credentials.NewTLS(&tls.Config{InsecureSkipVerify: true})),grpc.WithBlock())
 	if err != nil {
 		log.Fatalf("did not connect: %v", err)
 	}
